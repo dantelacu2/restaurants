@@ -137,6 +137,12 @@ getStats = async (req, res) => {
     res.json({data: new_array});
   });
 
+  process.stderr.on('data', (data) => {
+    // As said before, convert the Uint8Array to a readable string.
+    console.log(uint8arrayToString(data));
+    console.log("ERRORRR WITH PYTHON");
+    });
+
   process.on('close', (code) => {
     console.log(`child process close all stdio with code ${code}`);
   });
