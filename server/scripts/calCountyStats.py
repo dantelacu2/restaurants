@@ -21,3 +21,4 @@ for column in county_row_raw.find_all("td")[:-2]:
     county_row_processed.append(intValue)
 
 print(county_row_processed)
+sys.stdout.flush()
