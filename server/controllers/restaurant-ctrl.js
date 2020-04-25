@@ -116,7 +116,7 @@ getRestaurants = async (req, res) => {
     }).catch(err => console.log(err))
 }
 
-getStats = async (req, res) => {
+getStats = (req, res) => {
 	const spawn = require("child_process").spawn;
     var county = "Marin";
     console.log("Python Process started");
