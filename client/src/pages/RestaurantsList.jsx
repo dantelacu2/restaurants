@@ -8,6 +8,7 @@ import 'react-table/react-table.css'
 
 const Wrapper = styled.div`
     padding: 0 40px 40px 40px;
+    padding-top: 50px;
 `
 
 const Update = styled.div`
@@ -20,11 +21,11 @@ const Delete = styled.div`
     cursor: pointer;
 `
 
-class UpdateMovie extends Component {
+class UpdateRestaurant extends Component {
     updateUser = event => {
         event.preventDefault()
 
-        window.location.href = `/movies/update/${this.props.id}`
+        window.location.href = `/restaurants/update/${this.props.id}`
     }
 
     render() {
@@ -32,16 +33,16 @@ class UpdateMovie extends Component {
     }
 }
 
-class DeleteMovie extends Component {
+class DeleteRestaurant extends Component {
     deleteUser = event => {
         event.preventDefault()
 
         if (
             window.confirm(
-                `Do tou want to delete the movie ${this.props.id} permanently?`,
+                `Do tou want to delete the Restaurant ${this.props.id} permanently?`,
             )
         ) {
-            api.deleteMovieById(this.props.id)
+            api.deleteRestaurantById(this.props.id)
             window.location.reload()
         }
     }
@@ -51,11 +52,11 @@ class DeleteMovie extends Component {
     }
 }
 
-class MoviesList extends Component {
+class RestaurantsList extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            movies: [],
+            restaurants: [],
             columns: [],
             isLoading: false,
         }
@@ -64,17 +65,19 @@ class MoviesList extends Component {
     componentDidMount = async () => {
         this.setState({ isLoading: true })
 
-        await api.getAllMovies().then(movies => {
+        await api.getAllRestaurants().then(restaurants => {
+            console.log('this is called');
             this.setState({
-                movies: movies.data.data,
+                restaurants: restaurants.data.data,
                 isLoading: false,
             })
         })
     }
 
     render() {
-        const { movies, isLoading } = this.state
-
+        const { restaurants, isLoading } = this.state
+        console.log("HERE IS REST")
+        console.log(restaurants);
         const columns = [
             {
                 Header: 'ID',
@@ -87,14 +90,18 @@ class MoviesList extends Component {
                 filterable: true,
             },
             {
-                Header: 'Rating',
-                accessor: 'rating',
+                Header: 'Status',
+                accessor: 'status',
                 filterable: true,
             },
             {
-                Header: 'Time',
-                accessor: 'time',
-                Cell: props => <span>{props.value.join(' / ')}</span>,
+                Header: 'Precautions',
+                accessor: 'precautions',
+                filterable: true,
+            },
+            {   Header: 'Score',
+                accessor: 'score',
+                filterable: true,
             },
             {
                 Header: '',
@@ -102,7 +109,7 @@ class MoviesList extends Component {
                 Cell: function(props) {
                     return (
                         <span>
-                            <DeleteMovie id={props.original._id} />
+                            <DeleteRestaurant id={props.original._id} />
                         </span>
                     )
                 },
@@ -113,7 +120,7 @@ class MoviesList extends Component {
                 Cell: function(props) {
                     return (
                         <span>
-                            <UpdateMovie id={props.original._id} />
+                            <UpdateRestaurant id={props.original._id} />
                         </span>
                     )
                 },
@@ -121,7 +128,7 @@ class MoviesList extends Component {
         ]
 
         let showTable = true
-        if (!movies.length) {
+        if (!restaurants.length) {
             showTable = false
         }
 
@@ -129,11 +136,11 @@ class MoviesList extends Component {
             <Wrapper>
                 {showTable && (
                     <ReactTable
-                        data={movies}
+                        data={restaurants}
                         columns={columns}
                         loading={isLoading}
                         defaultPageSize={10}
-                        showPageSizeOptions={true}
+                        showPageSizeOptions={false}
                         minRows={0}
                     />
                 )}
@@ -142,4 +149,4 @@ class MoviesList extends Component {
     }
 }
 
-export default MoviesList
+export default RestaurantsList

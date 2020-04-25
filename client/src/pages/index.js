@@ -1,5 +1,6 @@
-import MoviesList from './MoviesList'
-import MoviesInsert from './MoviesInsert'
-import MoviesUpdate from './MoviesUpdate'
+import RestaurantsList from './RestaurantsList'
+import RestaurantsInsert from './RestaurantsInsert'
+import RestaurantsUpdate from './RestaurantsUpdate'
+import Masthead from './Masthead'
 
-export { MoviesList, MoviesInsert, MoviesUpdate }
+export { RestaurantsList, RestaurantsInsert, RestaurantsUpdate, Masthead }

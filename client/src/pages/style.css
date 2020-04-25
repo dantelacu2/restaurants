@@ -1,0 +1,28 @@
+.content-footer,
+.masthead-heading,
+.masthead-intro {
+  text-align: center;
+}
+
+.masthead {
+    background-color: rgb(20,20,20,.1);
+    background-size: contain;
+}
+
+.masthead-intro {
+    /* Layout Declarations */
+    margin-bottom: 0.1em;
+    /* Typography Declarations */
+    font-family: "Gentium Book Basic";
+    font-size: 2em;
+}
+
+.masthead-heading {
+    /* Layout Declarations */
+    /* Typography Declarations */
+    font-family: "Helvetica Neue";
+    font-weight: bold;
+    font-size: 6em;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+}
