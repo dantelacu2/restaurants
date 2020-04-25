@@ -117,19 +117,16 @@ getRestaurants = async (req, res) => {
 }
 
 getStats = async (req, res) => {
-    var spawn = require("child_process");
+    const spawn = require("child_process").spawn;
     var county = "Marin";
     console.log("Python Process started");
-    process = spawn.exec('python3 calCountyStats.py Marin', function (err){
-        if (err) {
-        console.log("child processes failed with error code: " + err.code);
-      }
-    });
+    var process = spawn('python', ['./calCountyStats.py', county]);
+
     process.on('error', function(err) {
         console.log("AN ERROR " + err);
     });
+    
     console.log("AVOVE COMMENT");
-    console.log(process);
     // read stdout from python
     process.stdout.on('data', function(data) { 
     console.log("READ PYTHON SCRIPT");
