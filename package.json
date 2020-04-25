@@ -5,7 +5,7 @@
   "license": "MIT",
 	"scripts": {
   "start": "cd server && npm install && node index.js && pip3 install pip && pip3 install bs4 && pip3 install requests",
-  "heroku-postbuild": "cd client && npm install && npm run build && pip3 install pip && pip3 install bs4 && pip3 install requests"
+  "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
