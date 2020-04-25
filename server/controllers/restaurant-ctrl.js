@@ -117,7 +117,7 @@ getRestaurants = async (req, res) => {
 }
 
 getStats = async (req, res) => {
-    const spawn = require("child_process").spawn;
+	const spawn = require("child_process").spawn;
     var county = "Marin";
     console.log("Python Process started");
     var process = spawn('python3', ['calCountyStats.py', county]);
@@ -128,16 +128,15 @@ getStats = async (req, res) => {
 
     console.log("AVOVE COMMENT");
     // read stdout from python
-    process.stdout.on('data', function(data) { 
+    process.stdout.on('data', (data) => { 
     console.log("READ PYTHON SCRIPT");
     var stringofdata = (data.toString());
+	console.log(stringofdata);
     var result = (stringofdata.substring(1, stringofdata.length-2));
     var new_array = result.split(', ');
-    new_array.push(county)
-    res.json({data: new_array});
-  });
-
-  process.stderr.on('data', (data) => {
+	});
+					  
+					  process.stderr.on('data', (data) => {
     // As said before, convert the Uint8Array to a readable string.
     console.log("ERRORRR WITH PYTHON");
     console.log(data.toString());
