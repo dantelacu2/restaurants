@@ -1,5 +1,35 @@
 const Restaurant = require('../models/restaurant-model')
 const path = require('path');
+//////stat
+const { spawn } = require('child_process')
+
+const logOutput = (name) => (data) => console.log(`[${name}] ${data.toString()}`)
+
+function run() {
+  const process = spawn('python', ['./calCountyStats.py', 'Marin']);
+
+  process.stdout.on(
+    'data',
+    logOutput('stdout')
+  );
+
+  process.stderr.on(
+    'data',
+    logOutput('stderr')
+  );
+}
+
+(() => {
+  try {
+    run()
+    // process.exit(0)
+  } catch (e) {
+    console.error(e.stack);
+    process.exit(1);
+  }
+});
+
+//asdfsdfend
 
 createRestaurant = (req, res) => {
     const body = req.body
@@ -117,38 +147,8 @@ getRestaurants = async (req, res) => {
 }
 
 getStats = (req, res) => {
-	const spawn = require("child_process").spawn;
-    var county = "Marin";
-    console.log("Python Process started");
-    var process = spawn('python3', ['calCountyStats.py', county]);
+    run();
 
-    process.on('error', function(err) {
-        console.log("AN ERROR " + err);
-    });
-
-    console.log("AVOVE COMMENT");
-    // read stdout from python
-    process.stdout.on('data', (data) => { 
-    console.log("READ PYTHON SCRIPT");
-    var stringofdata = (data.toString());
-	console.log(stringofdata);
-    var result = (stringofdata.substring(1, stringofdata.length-2));
-    var new_array = result.split(', ');
-	});
-					  
-					  process.stderr.on('data', (data) => {
-    // As said before, convert the Uint8Array to a readable string.
-    console.log("ERRORRR WITH PYTHON");
-    console.log(data.toString());
-    });
-
-  process.on('close', (code) => {
-    console.log(`child process close all stdio with code ${code}`);
-  });
-  
-  process.on('exit', (code) => {
-    console.log(`child process exited with code ${code}`);
-  });
 }
 
 
