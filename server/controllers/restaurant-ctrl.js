@@ -139,7 +139,6 @@ getStats = async (req, res) => {
 
   process.stderr.on('data', (data) => {
     // As said before, convert the Uint8Array to a readable string.
-    console.log(data);
     console.log("ERRORRR WITH PYTHON");
     console.log(data.toString());
     });

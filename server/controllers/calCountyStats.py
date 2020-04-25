@@ -1,7 +1,8 @@
-import requests
-from bs4 import BeautifulSoup
 import re
 import sys
+import requests
+
+from bs4 import BeautifulSoup
 
 url = 'https://en.wikipedia.org/wiki/2020_coronavirus_pandemic_in_California'
 r = requests.get(url, allow_redirects=True)
