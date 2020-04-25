@@ -1,35 +1,7 @@
 const Restaurant = require('../models/restaurant-model')
 const path = require('path');
-//////stat
-const { spawn } = require('child_process')
+var unirest = require("unirest");
 
-const logOutput = (name) => (data) => console.log(`[${name}] ${data.toString()}`)
-
-function run() {
-  const process = spawn('python', ['./calCountyStats.py', 'Marin']);
-
-  process.stdout.on(
-    'data',
-    logOutput('stdout')
-  );
-
-  process.stderr.on(
-    'data',
-    logOutput('stderr')
-  );
-}
-
-(() => {
-  try {
-    run()
-    // process.exit(0)
-  } catch (e) {
-    console.error(e.stack);
-    process.exit(1);
-  }
-});
-
-//asdfsdfend
 
 createRestaurant = (req, res) => {
     const body = req.body
@@ -142,13 +114,36 @@ getRestaurants = async (req, res) => {
                 .status(404)
                 .json({ success: false, error: `Restaurant not found` })
         }
+        console.log("TST");
+
         return res.status(200).json({ success: true, data: restaurants })
     }).catch(err => console.log(err))
 }
 
-getStats = (req, res) => {
-    run();
+getStats = (req2, res2) => {
 
+    var req = unirest("GET", "https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/total");
+
+    req.headers({
+        "x-rapidapi-host": "covid-19-coronavirus-statistics.p.rapidapi.com",
+        "x-rapidapi-key": "739f139690msh6959ca86a02a200p1711ffjsnfe7c031e3f46"
+    });
+
+    var test_array = []
+
+    req.end(function async (res) {
+        if (res.error) throw new Error(res.error);
+        test_array.push(res.body.data.confirmed);
+        test_array.push(res.body.data.deaths);
+        test_array.push(res.body.data.recovered);
+        var s = new Date(Date.parse(res.body.data.lastReported)).toLocaleDateString("en-US");
+        var q = new Date(Date.parse(res.body.data.lastReported)).toLocaleTimeString("en-US");
+        console.log(s);
+        console.log(q);
+        //test_array.push()
+        console.log(res.body);
+        res2.json({data: test_array, time: [s, q]});
+    });
 }
 
 

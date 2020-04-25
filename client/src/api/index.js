@@ -1,9 +1,9 @@
 import axios from 'axios'
 
-// var port = process.env.PORT || 'dev'
-// var url = ''
-// if (port == 'dev') {url = 'http://localhost:3000/api'}
-    var url = 'https://marinrestaurants.herokuapp.com/api';
+// changes api url's depending on environment
+let url = '';
+if (process.env.NODE_ENV !== "production") url = 'http://localhost:3000/api' ;
+else url = 'https://marinrestaurants.herokuapp.com/api';
 
 const api = axios.create({
     baseURL: url,

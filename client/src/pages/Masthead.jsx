@@ -21,51 +21,61 @@ const Column = styled.div.attrs({
     className: 'col-md-4'
 })``
 
+// turns a number into a Locale String but only if it exists.
+function isReturned(flat_element) {
+    try {
+        if (flat_element != null) return flat_element;
+        else return "loading";
+    }
+    catch {
+        return "loading";
+    }
+}
+
 
 class Masthead extends Component {
     constructor(props) {
         super(props)
         this.state = {
             statistics: [],
+            time: [],
         }
     }
-
+    // updates state if data is retrieved.
     componentDidMount = async () => {
+        console.log('this called');
         await api.getStats().then(statistics => {
-            console.log('this is called');
-            console.log("HERE");
-            console.log(statistics.data.data);
-            console.log("HERE");
             this.setState({
                 statistics: statistics.data.data,
-            })
+                time: statistics.data.time
+            });
         }).catch(err => {
-            console.log("ERROR" + err);
+            console.log("ERROR w/ mounting: " + err);
         })
     }
 
     render() {
-        console.log(this.state)
-        const { statistics } = this.state
+        const { statistics, time } = this.state;
         return (
         <Wrapper>
             <div className="row">
                 <Column>
                     <Card>
-                        <CardBody>Cases in {statistics[3]}</CardBody>
-                        <CardBody><h1>{statistics[0]}</h1></CardBody>
+                        <CardBody>Global Confirmed Cases </CardBody>
+                        <CardBody><h1>{isReturned(statistics[0]).toLocaleString()}</h1></CardBody>
                     </Card>
                 </Column>
                 <Column>
                     <Card>
-                        <CardBody>Deaths in {statistics[3]}</CardBody>
-                        <CardBody><h1>{statistics[1]}</h1></CardBody>
+                        <CardBody>Global confirmed deaths</CardBody>
+                        <CardBody><h1>{isReturned(statistics[1]).toLocaleString()}</h1></CardBody>
                     </Card>
+                Last Updated: {isReturned(time[0])}, {isReturned(time[1])}
                 </Column>
                 <Column>
                     <Card>
-                        <CardBody>Recoveries in {statistics[3]}</CardBody>
-                        <CardBody><h1>{statistics[2]}</h1></CardBody>
+                        <CardBody>Global confirmed recoveries</CardBody>
+                        <CardBody><h1>{isReturned(statistics[2]).toLocaleString()}</h1></CardBody>
                     </Card>
                 </Column>
             </div>
