@@ -125,7 +125,7 @@ getStats = async (req, res) => {
     process.on('error', function(err) {
         console.log("AN ERROR " + err);
     });
-    
+
     console.log("AVOVE COMMENT");
     // read stdout from python
     process.stdout.on('data', function(data) { 
@@ -135,7 +135,15 @@ getStats = async (req, res) => {
     var new_array = result.split(', ');
     new_array.push(county)
     res.json({data: new_array});
-  }) 
+  });
+
+  process.on('close', (code) => {
+    console.log(`child process close all stdio with code ${code}`);
+  });
+  
+  process.on('exit', (code) => {
+    console.log(`child process exited with code ${code}`);
+  });
 }
 
 
