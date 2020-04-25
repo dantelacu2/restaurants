@@ -15,7 +15,7 @@ export const updateRestaurantById = (id, payload) => api.put(`/restaurant/${id}`
 export const deleteRestaurantById = id => api.delete(`/restaurant/${id}`)
 export const getRestaurantById = id => api.get(`/restaurant/${id}`)
 
-export const getStats = () => api.get('/countyStats')
+export const getStats = () => api.get(`/countyStats`)
 
 const apis = {
     insertRestaurant,

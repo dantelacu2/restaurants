@@ -124,9 +124,11 @@ getStats = async (req, res) => {
     process.on('error', function(err) {
         console.log("AN ERROR " + err);
     });
+    console.log("AVOVE COMMENT");
+    console.log(process);
     // read stdout from python
     process.stdout.on('data', function(data) { 
-        console.log("READ PYTHON SCRIPT");
+    console.log("READ PYTHON SCRIPT");
     var stringofdata = (data.toString());
     var result = (stringofdata.substring(1, stringofdata.length-2));
     var new_array = result.split(', ');

@@ -39,6 +39,8 @@ class Masthead extends Component {
             this.setState({
                 statistics: statistics.data.data,
             })
+        }).catch(err => {
+            console.log("ERROR" + err);
         })
     }
 
