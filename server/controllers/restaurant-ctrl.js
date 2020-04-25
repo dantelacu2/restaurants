@@ -120,7 +120,7 @@ getStats = async (req, res) => {
     const spawn = require("child_process").spawn;
     var county = "Marin";
     console.log("Python Process started");
-    var process = spawn('python', ['./calCountyStats.py', county]);
+    var process = spawn('python3', ['calCountyStats.py', county]);
 
     process.on('error', function(err) {
         console.log("AN ERROR " + err);
