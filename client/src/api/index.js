@@ -1,7 +1,14 @@
 import axios from 'axios'
 
+var port = process.env.PORT || 'dev'
+var url = ''
+if (port == 'dev') {url = 'http://localhost:3000/api'}
+else {
+    url = 'https://marinrestaurants.herokuapp.com/api'
+}
+
 const api = axios.create({
-    baseURL: 'http://localhost:3000/api',
+    baseURL: url,
 })
 
 export const insertRestaurant = payload => api.post(`/restaurant`, payload)

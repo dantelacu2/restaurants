@@ -16,10 +16,12 @@ createRestaurant = (req, res) => {
     if (!restaurant) {
         return res.status(400).json({ success: false, error: err })
     }
+    console.log("RESTAURANT MADE");
 
     restaurant
         .save()
         .then(() => {
+            console.log("SENDING TO REACT");
             return res.status(201).json({
                 success: true,
                 name: restaurant.name,
@@ -27,6 +29,7 @@ createRestaurant = (req, res) => {
             })
         })
         .catch(error => {
+            console.log("FAILED TO SEND TO REACT");
             return res.status(400).json({
                 error,
                 message: 'Rst not created!',
@@ -116,12 +119,14 @@ getRestaurants = async (req, res) => {
 getStats = async (req, res) => {
     var spawn = require("child_process").spawn;
     var county = "Marin";
+    console.log("Python Process started");
     var process = spawn('python3', [(path.join(__dirname, "../", "scripts/calCountyStats.py")), county]);
     process.on('error', function(err) {
         console.log("AN ERROR " + err);
     });
     // read stdout from python
     process.stdout.on('data', function(data) { 
+        console.log("READ PYTHON SCRIPT");
     var stringofdata = (data.toString());
     var result = (stringofdata.substring(1, stringofdata.length-2));
     var new_array = result.split(', ');
