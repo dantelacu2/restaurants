@@ -39,10 +39,10 @@ componentDidMount = async () => {
       <MDBContainer>
         <MDBRow>
           <MDBCol>
-          <h6 className="text-left">Made by Dante Lacuadra</h6>
+          <p className="text-left">Made by Dante Lacuadra</p>
           </MDBCol>
           <MDBCol>
-            <h6>Data was last updated on {isReturned(time[0])}, {isReturned(time[1])}</h6>
+            <p>Data was last updated on {isReturned(time[0])}, {isReturned(time[1])}</p>
           </MDBCol>
         </MDBRow>
       </MDBContainer>
