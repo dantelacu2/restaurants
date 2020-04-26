@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
-import { NavBar } from '../components'
+import { NavbarPage } from '../components'
 import { FooterPage } from '../components';
 
 import { RestaurantsList, RestaurantsInsert, RestaurantsUpdate, Masthead } from '../pages'
@@ -13,7 +13,7 @@ function App() {
     return (
         <div>
         <Router>
-            <NavBar />
+            <NavbarPage />
             <Switch>
                 <Route path="/" exact component={Masthead}/>
                 <Route path="/restaurants/list" exact component={RestaurantsList} />

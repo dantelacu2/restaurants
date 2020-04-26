@@ -23,7 +23,7 @@ class NavbarPage extends PureComponent {
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="mr-auto">
       <Nav.Link href="/restaurants/list">List</Nav.Link>
-      <Nav.Link href="/restaurant/create">Create</Nav.Link>
+      <Nav.Link href="/restaurants/create">Create</Nav.Link>
     </Nav>
     <Form inline>
       <FormControl type="text" placeholder="Search" className="mr-sm-2" />

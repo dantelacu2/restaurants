@@ -1,6 +1,6 @@
 import Links from './Links'
 import Logo from './Logo'
-import NavBar from './NavBar'
+import NavbarPage from './NavbarPage'
 import FooterPage from './FooterPage'
 
-export { Links, Logo, NavBar, FooterPage }
+export { Links, Logo, NavbarPage, FooterPage }
