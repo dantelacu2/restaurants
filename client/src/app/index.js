@@ -2,12 +2,16 @@ import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import { NavBar } from '../components'
+import { FooterPage } from '../components';
+
 import { RestaurantsList, RestaurantsInsert, RestaurantsUpdate, Masthead } from '../pages'
+import 'mdbreact/dist/css/mdb.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
     return (
+        <div>
         <Router>
             <NavBar />
             <Switch>
@@ -20,7 +24,10 @@ function App() {
                     component={RestaurantsUpdate}
                 />
             </Switch>
+            
         </Router>
+        <FooterPage time="time"/>
+        </div>
     )
 }
 

@@ -4,22 +4,27 @@ import styled from 'styled-components'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import api from '../api'
 
-
+const MastPadding = styled.div`
+    padding-bottom: 100px;
+`
 const Wrapper = styled.div`
     padding: 0 40px 40px 40px;
     padding-top: 50px;
 `
 const CardBody = styled.div.attrs({
-    className: 'card-body text-center text-secondary',
+    className: 'card-body text-center text-black',
 })``
 
 const Card = styled.div.attrs({
     className: 'card'
-})``
+})`
+`
 
 const Column = styled.div.attrs({
     className: 'col-md-4'
-})``
+})`
+padding: 20px;
+`
 
 // turns a number into a Locale String but only if it exists.
 function isReturned(flat_element) {
@@ -58,6 +63,7 @@ class Masthead extends Component {
         const { statistics, time } = this.state;
         return (
         <Wrapper>
+            <MastPadding>
             <div className="row">
                 <Column>
                     <Card>
@@ -70,7 +76,6 @@ class Masthead extends Component {
                         <CardBody>Global confirmed deaths</CardBody>
                         <CardBody><h1>{isReturned(statistics[1]).toLocaleString()}</h1></CardBody>
                     </Card>
-                Last Updated: {isReturned(time[0])}, {isReturned(time[1])}
                 </Column>
                 <Column>
                     <Card>
@@ -79,6 +84,7 @@ class Masthead extends Component {
                     </Card>
                 </Column>
             </div>
+            </MastPadding>
         </Wrapper>
         );
     }
