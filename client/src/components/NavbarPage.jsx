@@ -5,7 +5,7 @@ import NavDropdown from 'react-bootstrap/DropdownButton'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import FormControl from 'react-bootstrap/FormControl'
-
+import Links from './Links';
 
 class NavbarPage extends PureComponent {
   state = {
@@ -22,8 +22,7 @@ class NavbarPage extends PureComponent {
   <Navbar.Toggle aria-controls="basic-navbar-nav" />
   <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="mr-auto">
-      <Nav.Link href="/restaurants/list">List</Nav.Link>
-      <Nav.Link href="/restaurants/create">Create</Nav.Link>
+      <Links/>
     </Nav>
     <Form inline>
       <FormControl type="text" placeholder="Search" className="mr-sm-2" />
