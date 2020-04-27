@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { connect } from 'react-redux';
+import * as actions from '../store/actions/auth'
+import Button from 'react-bootstrap/Button'
+import {withRouter} from 'react-router-dom';
 
 const Collapse = styled.div.attrs({
     className: 'collpase navbar-collapse',
@@ -14,7 +18,9 @@ const Item = styled.div.attrs({
     className: 'collpase navbar-collapse',
 })``
 
+
 class Links extends Component {
+
     render() {
         return (
             <React.Fragment>
@@ -33,6 +39,13 @@ class Links extends Component {
                                 Create Restaurant
                             </Link>
                         </Item>
+                        <Item>
+                            {this.props.isAuthenticated ?
+                            <Link to="/logout" className="nav-link">Logout</Link> 
+                            : <Link to="/auth" className="nav-link">Admin Login</Link>
+
+                            }
+                        </Item>
                     </List>
                 </Collapse>
             </React.Fragment>
@@ -40,4 +53,12 @@ class Links extends Component {
     }
 }
 
-export default Links
+const mapStateToProps = state => {
+    return {
+      isAuthenticated: state.auth.token !== null
+    };
+  };
+  
+  
+export default withRouter( connect( mapStateToProps, null )( Links ) );
+

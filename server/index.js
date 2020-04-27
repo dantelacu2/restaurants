@@ -5,9 +5,10 @@ const path = require('path')
 
 const db = require('./db')
 const restaurantRouter = require('./routes/restaurant-router')
+const adminRouter = require('./routes/admin-router')
 
 const app = express()
-const apiPort = process.env.PORT || 3000;
+const apiPort = process.env.PORT || 8081;
 
 app.use(express.static(path.join(__dirname, "../client/build")));
 
@@ -23,6 +24,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api', restaurantRouter)
+app.use('/admin', adminRouter)
 
 
 app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`))

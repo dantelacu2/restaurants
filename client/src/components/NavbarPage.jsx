@@ -11,6 +11,7 @@ class NavbarPage extends PureComponent {
   state = {
     isOpen: false,
   };
+
   openModal = () => this.setState(() => ({ isOpen: true }));
   closeModal = () => this.setState(({ isOpen }) => (isOpen ? { isOpen: false } : null));
   render() {
@@ -23,10 +24,10 @@ class NavbarPage extends PureComponent {
     <Nav className="mr-auto">
       <Links/>
     </Nav>
-    <Form inline>
+    {/* <Form inline>
       <FormControl type="text" placeholder="Search" className="mr-sm-2" />
       <Button variant="outline-success">Search</Button>
-    </Form>
+    </Form> */}
   </Navbar.Collapse>
 </Navbar>
     );
@@ -34,3 +35,4 @@ class NavbarPage extends PureComponent {
 }
 
 export default NavbarPage;
+

@@ -5,6 +5,7 @@ import api from '../api'
 import styled from 'styled-components'
 
 import 'react-table/react-table.css'
+import './style.css'
 
 const Wrapper = styled.div`
     padding: 0 40px 40px 40px;
@@ -20,6 +21,11 @@ const Delete = styled.div`
     color: #ff0000;
     cursor: pointer;
 `
+
+const MastPadding = styled.div`
+    padding-bottom: 100px;
+`
+
 
 class UpdateRestaurant extends Component {
     updateUser = event => {
@@ -76,36 +82,70 @@ class RestaurantsList extends Component {
 
     render() {
         const { restaurants, isLoading } = this.state
-        console.log("HERE IS REST")
+        console.log("HERE IS REST");
+        const Statuses = ( {values} ) => {
+            // Loop through the array and create a badge-like component instead of a comma-separated string
+            return (
+              <>
+                {values.map((status, idx) => {
+                    var patt = /no/i;
+                    // checks if it's on on badge on an off badge
+                    if (patt.test(status)) {
+                  return (
+                    <span key={idx} className="badge-off">
+                      {status}
+                    </span>
+                  );
+                }
+                else {
+                    return (
+                        <span key={idx} className="badge-on">
+                          {status}
+                        </span>
+                      );
+                }
+                })}
+              </>
+            );
+        };
         console.log(restaurants);
+        console.log("loggint his")
         const columns = [
             {
-                Header: 'ID',
-                accessor: '_id',
+                Header: 'Score',
+                accessor: 'score',
                 filterable: true,
+                width: 70,
             },
             {
                 Header: 'Name',
                 accessor: 'name',
                 filterable: true,
+                width: 300,
+
             },
             {
-                Header: 'Status',
-                accessor: 'status',
+                Header: 'Phone #',
+                accessor: 'phone',
                 filterable: true,
+                width: 130,
             },
             {
                 Header: 'Precautions',
                 accessor: 'precautions',
                 filterable: true,
             },
-            {   Header: 'Score',
-                accessor: 'score',
+            {
+                Header: 'Statuses',
+                accessor: 'status',
                 filterable: true,
+                Cell: v => <Statuses values={v.value} />
+                //Cell: v => <h1>{v.value}</h1>,
             },
             {
                 Header: '',
                 accessor: '',
+                width: 70,
                 Cell: function(props) {
                     return (
                         <span>
@@ -117,6 +157,7 @@ class RestaurantsList extends Component {
             {
                 Header: '',
                 accessor: '',
+                width: 70,
                 Cell: function(props) {
                     return (
                         <span>
@@ -133,18 +174,22 @@ class RestaurantsList extends Component {
         }
 
         return (
-            <Wrapper>
-                {showTable && (
-                    <ReactTable
-                        data={restaurants}
-                        columns={columns}
-                        loading={isLoading}
-                        defaultPageSize={10}
-                        showPageSizeOptions={false}
-                        minRows={0}
-                    />
-                )}
-            </Wrapper>
+            <MastPadding>
+                <Wrapper>
+                    {showTable && (
+                        <ReactTable
+                            data={restaurants}
+                            columns={columns}
+                            loading={isLoading}
+                            defaultPageSize={20}
+                            showPageSizeOptions={false}
+                            minRows={0}
+                            useResizeColumns={true}
+                            resizable={true}
+                        />
+                    )}
+                </Wrapper>
+            </MastPadding>
         )
     }
 }

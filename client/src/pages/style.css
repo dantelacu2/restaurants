@@ -26,3 +26,24 @@
     letter-spacing: -0.02em;
     text-transform: uppercase;
 }
+
+.badge-on {
+    background-color: #74ffa5;
+    color: black;
+    margin-right: 4px;
+    padding: 4px 8px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.badge-off {
+    background-color: rgb(255, 79, 79);
+    color: black;
+    margin-right: 4px;
+    padding: 4px 8px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
